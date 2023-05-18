@@ -33,4 +33,12 @@ Route::get('/messageWithProperResponse',function(){
 
 //insert something to db 
             //api name  //user controller name //function name
-Route::post('/student', 'App\Http\Controllers\ApiController@create');
+Route::post('/createStudent', 'App\Http\Controllers\ApiController@create');
+
+Route::get('/viewStudent', 'App\Http\Controllers\ApiController@viewStudent');
+
+Route::get('/viewStudent/{id}', 'App\Http\Controllers\ApiController@viewStudentById');
+
+Route::put('/updateStudentById/{id}', 'App\Http\Controllers\ApiController@updateStudentById');
+
+Route::delete('/deleteStudentByFname/{Fname}', 'App\Http\Controllers\ApiController@deleteStudentByFname');
