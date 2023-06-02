@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student; 
 
+use Illuminate\Support\Facades\DB; // Import the DB class
+
+
 /** 
 *@OA\Info(
  *     title="My API",
@@ -360,4 +363,14 @@ class ApiController extends Controller
         $student->delete();
         return response()->json("delete by Fname success!");
     }
+
+    public function getChecksum()
+    {
+        $query = 'CHECKSUM TABLE students';
+        $result = DB::select($query);
+        // reset purpose is to get the Checksum
+        $checksum = reset($result)->Checksum;
+        return response()->json(['checksum' => $checksum]);
+    }
+ 
 }

@@ -41,6 +41,7 @@
     // create() is called when a component is created or initialized. then it will trigger the fetchStudents() method
     created() {
       this.fetchStudents();
+      this.checkSum();
     },
     // methods then it's getting data to db then pasting it to students array
     methods: {
@@ -53,6 +54,12 @@
           .catch(error => {
             console.error(error);
           });
+      },
+      checkSum(){
+        axios.get('/api/getChecksum/students').then(response => {
+            const tbVal = response.data;
+            console.log(tbVal);
+        })
       },
     },
   };

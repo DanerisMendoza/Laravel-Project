@@ -29,7 +29,7 @@
                         // Handle error response
                         console.error(error);
                     });
-            }
+            },
         }
     }
 </script>
