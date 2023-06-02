@@ -51,7 +51,7 @@
 
       deleteStudent(id){
         axios.delete(`/api/deleteStudentById/${id}`).then(response => {
-            this.students = response.data;
+            console.log('delete success');
           })
           .catch(error => {
             console.error(error);
@@ -77,12 +77,12 @@
       isDbChange(){
         setInterval(() => {
           axios.get('/api/getChecksum').then(response => {
-            if (this.oldChecksum !== response.data['result']) {
+            if (this.oldChecksum != response.data['result']) {
               this.oldChecksum = response.data['result'];
               this.fetchStudents();
             }
           });
-        }, 3000); 
+        }, 2000); 
       },
     },
   };

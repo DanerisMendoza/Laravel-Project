@@ -23,7 +23,7 @@
                 axios.post('/api/createStudent', data)
                     .then(response => {
                         // Handle success response
-                        alert('Insert Success!');
+                        console.log('Insert Success!');
                     })
                     .catch(error => {
                         // Handle error response
