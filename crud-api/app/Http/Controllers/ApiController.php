@@ -368,9 +368,8 @@ class ApiController extends Controller
     {
         $query = 'CHECKSUM TABLE students';
         $result = DB::select($query);
-        // reset purpose is to get the Checksum
         $checksum = reset($result)->Checksum;
-        return response()->json(['checksum' => $checksum]);
+        return response()->json(['result' => $checksum]);
     }
  
 }

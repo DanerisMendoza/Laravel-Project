@@ -45,4 +45,6 @@ Route::put('/updateStudentById/{id}', 'App\Http\Controllers\ApiController@update
 
 Route::delete('/deleteStudentByFname/{Fname}', 'App\Http\Controllers\ApiController@deleteStudentByFname');
 
+Route::delete('/deleteStudentById/{id}', 'App\Http\Controllers\ApiController@deleteStudentById');
+
 Route::get('/getChecksum', 'App\Http\Controllers\ApiController@getChecksum');

@@ -22,6 +22,7 @@
             <td>{{ student.password }}</td>
             <td>{{ student.created_at }}</td>
             <td>{{ student.updated_at }}</td>
+            <td><button @click="deleteStudent(student.id)">Delete</button></td>
         </tr>
         </tbody>
     </table>
@@ -36,30 +37,52 @@
     data() {
       return {
         students: [],
+        oldChecksum : '',
       };
     },
     // create() is called when a component is created or initialized. then it will trigger the fetchStudents() method
     created() {
-      this.fetchStudents();
       this.checkSum();
+      this.fetchStudents();
+      this.isDbChange();
     },
     // methods then it's getting data to db then pasting it to students array
     methods: {
-      fetchStudents() {
-        axios
-          .get('/api/viewStudent')
-          .then(response => {
+
+      deleteStudent(id){
+        axios.delete(`/api/deleteStudentById/${id}`).then(response => {
             this.students = response.data;
           })
           .catch(error => {
             console.error(error);
           });
       },
+
+      fetchStudents() {
+        axios.get('/api/viewStudent').then(response => {
+            this.students = response.data;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      },
+
       checkSum(){
-        axios.get('/api/getChecksum/students').then(response => {
-            const tbVal = response.data;
-            console.log(tbVal);
+        axios.get('/api/getChecksum').then(response => {
+            this.oldChecksum = response.data['result'];
         })
+      },
+      
+      // if db change refresh the table
+      isDbChange(){
+        setInterval(() => {
+          axios.get('/api/getChecksum').then(response => {
+            if (this.oldChecksum !== response.data['result']) {
+              this.oldChecksum = response.data['result'];
+              this.fetchStudents();
+            }
+          });
+        }, 3000); 
       },
     },
   };
